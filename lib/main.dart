@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
-import 'screen.dart'; // 屏幕适配
 
-import 'NewGroup.dart'; // 新建群组页面
-import 'DrawerLt.dart'; // Drawer抽屉子项
+// com  => 无视图的组件
+import 'com/screen.dart'; // 屏幕适配
+
+// page => 路由页面
+import 'page/NewGroup.dart';
+import 'page/NewRadio.dart';
+import 'page/Contact.dart';
+import 'page/Favorites.dart';
+import 'page/Invite.dart';
+import 'page/Setting.dart';
+import 'page/Statement.dart';
+
+// view => 视图组件
+import 'view/DrawerLt.dart'; // Drawer抽屉子项
 
 
 void main() {
@@ -21,10 +32,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
-      home: Home(),
+      // home: Home(),
       theme: ThemeData(
         primarySwatch: Colors.purple
       ),
+      initialRoute: "/",
+      routes: { // 路由表
+        "/": (context) => Home(),
+        "NewGroup": (context) => RouterNewGroup(),
+        "NewRadio": (context) => RouterNewRadio(),
+        "Contact": (context) => RouterContact(),
+        "Favorites": (context) => RouterFavorites(),
+        "Invite": (context) => RouterInvite(),
+        "Setting": (context) => RouterSetting(),
+        "Statement": (context) => RouterStatement(),
+      }
     );
   }
 }
@@ -47,7 +69,6 @@ class _MyStatefulWidgetState extends State<Home> {
           icon: Icon(Icons.menu),
           onPressed: () {
             print('用户点击了Menu按钮');
-            NewGroup();
             // Scaffold.of(context).showSnackBar(SnackBar(
             //   content: Text('Hello!'),
             // ));
@@ -111,16 +132,16 @@ class _MyStatefulWidgetState extends State<Home> {
             ),
           ),
 
-          DrawerLt('新建群组', Icon(Icons.group)),
-          DrawerLt('新建电台', Icon(Icons.radio)),
+          DrawerLt('新建群组', Icon(Icons.group), 'NewGroup'),
+          DrawerLt('新建电台', Icon(Icons.radio), 'NewRadio'),
 
           Divider(), // 横线
           
-          DrawerLt('联系人', Icon(Icons.contact_phone)),
-          DrawerLt('收藏夹', Icon(Icons.turned_in)),
-          DrawerLt('邀请朋友', Icon(Icons.weekend)),
-          DrawerLt('设置', Icon(Icons.settings)),
-          DrawerLt('软件声明', Icon(Icons.info)),
+          DrawerLt('联系人', Icon(Icons.contact_phone), 'Contact'),
+          DrawerLt('收藏夹', Icon(Icons.turned_in), 'Favorites'),
+          DrawerLt('邀请朋友', Icon(Icons.weekend), 'Invite'),
+          DrawerLt('设置', Icon(Icons.settings), 'Setting'),
+          DrawerLt('软件声明', Icon(Icons.info), 'Statement'),
 
         ],
       ),
