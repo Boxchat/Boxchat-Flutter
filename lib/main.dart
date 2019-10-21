@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'screen.dart';
+
+import 'NewGroup.dart';
+import 'DrawerLt.dart';
+
+
 
 
 void main() {
-  // 强制横屏
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ]);
  
   runApp(MyApp());
 }
 
 // This Widget is the main application widget.
 class MyApp extends StatelessWidget {
+  MyApp() {
+    Screen(); // 屏幕设置
+  }
   
   static const String _title = 'Boxchat';
 
@@ -47,10 +50,12 @@ class _MyStatefulWidgetState extends State<Home> {
           icon: Icon(Icons.menu),
           onPressed: () {
             print('用户点击了Menu按钮');
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text('Hello!'),
-            ));
+            NewGroup();
+            // Scaffold.of(context).showSnackBar(SnackBar(
+            //   content: Text('Hello!'),
+            // ));
             // _drawer.currentState.open();
+
           },
         ),
       ),
@@ -108,100 +113,17 @@ class _MyStatefulWidgetState extends State<Home> {
               backgroundImage: AssetImage("asset/images/Mathon.jpg"),
             ),
           ),
-          ListTile(
-            title: Text(
-              '新建群组',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15
-              ),
-            ),
-            leading: Icon(Icons.group),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: Text(
-              '新建电台',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15
-              ),
-            ),
-            leading: Icon(Icons.radio),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
+
+          DrawerLt('新建群组', Icon(Icons.group)),
+          DrawerLt('新建电台', Icon(Icons.radio)),
 
           Divider(), // 横线
           
-          ListTile(
-            title: Text(
-              '联系人',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15
-              ),
-            ),
-            leading: Icon(Icons.contact_phone),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: Text(
-              '收藏夹',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15
-              ),
-            ),
-            leading: Icon(Icons.turned_in),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: Text(
-              '邀请朋友',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15
-              ),
-            ),
-            leading: Icon(Icons.weekend),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: Text(
-              '设置',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15
-              ),
-            ),
-            leading: Icon(Icons.settings),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            title: Text(
-              '软件声明',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 15
-              ),
-            ),
-            leading: Icon(Icons.info),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
+          DrawerLt('联系人', Icon(Icons.contact_phone)),
+          DrawerLt('收藏夹', Icon(Icons.turned_in)),
+          DrawerLt('邀请朋友', Icon(Icons.weekend)),
+          DrawerLt('设置', Icon(Icons.settings)),
+          DrawerLt('软件声明', Icon(Icons.info)),
 
         ],
       ),
