@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'screen.dart';
+import 'screen.dart'; // 屏幕适配
 
-import 'NewGroup.dart';
-import 'DrawerLt.dart';
-
-
+import 'NewGroup.dart'; // 新建群组页面
+import 'DrawerLt.dart'; // Drawer抽屉子项
 
 
 void main() {
- 
   runApp(MyApp());
 }
 
