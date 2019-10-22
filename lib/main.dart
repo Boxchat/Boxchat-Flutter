@@ -13,7 +13,9 @@ import 'page/Setting.dart';
 import 'page/Statement.dart';
 
 // view => 视图组件
-import 'view/DrawerLt.dart'; // Drawer抽屉子项
+import 'view/DrawerLt.dart'; // Drawer-ListTile
+import 'view/BoxAppBar.dart'; // AppBar
+import 'view/BoxBottomNavigationBar.dart'; // BottomNavigationBar
 
 
 void main() {
@@ -25,13 +27,11 @@ class MyApp extends StatelessWidget {
   MyApp() {
     Screen(); // 屏幕设置
   }
-  
-  static const String _title = 'Boxchat';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
+      title: 'Boxchat',
       // home: Home(),
       theme: ThemeData(
         primarySwatch: Colors.purple
@@ -63,36 +63,12 @@ class _MyStatefulWidgetState extends State<Home> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Boxchat'),
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {
-            print('用户点击了Menu按钮');
-            // Scaffold.of(context).showSnackBar(SnackBar(
-            //   content: Text('Hello!'),
-            // ));
-            // _drawer.currentState.open();
-
-          },
-        ),
-      ),
+      appBar: BoxAppBar(),
       drawer: _drawer(context),
       body: Center(
         child: Text('You have pressed the button $_count times.'),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            title: Text('聊天'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.radio),
-            title: Text('电台'),
-          ),
-        ],
-      ),
+      bottomNavigationBar: BoxBottomNavigationBar(),
 
 
       floatingActionButton: FloatingActionButton(
