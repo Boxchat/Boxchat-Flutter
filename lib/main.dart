@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+// import 'dart:async';
+// import 'package:flutter_redux/flutter_redux.dart';
+// import 'package:redux/redux.dart';
+import 'package:provider/provider.dart';
+// import 'package:flutter/foundation.dart';
+// import 'package:flutter_provider/store/index.dart' show Store;
+// import 'package:flutter_provider/page/firstPage.dart' show FirstPage;
+
 
 // com  => 无视图的组件
 import 'com/screen.dart'; // 屏幕适配
@@ -11,6 +19,8 @@ import 'page/Favorites.dart';
 import 'page/Invite.dart';
 import 'page/Setting.dart';
 import 'page/Statement.dart';
+import 'page/Chat.dart';
+import 'page/Radio.dart';
 
 // view => 视图组件
 import 'view/DrawerLt.dart'; // Drawer-ListTile
@@ -18,9 +28,16 @@ import 'view/BoxAppBar.dart'; // AppBar
 import 'view/BoxBottomNavigationBar.dart'; // BottomNavigationBar
 
 
-void main() {
-  runApp(MyApp());
-}
+// Store => 集中状态管理
+import './store/index.dart';
+
+
+// 程序入口
+void main() => runApp(ChangeNotifierProvider(
+  builder: (context) => DataInfo(),
+  child: MyApp(),
+));
+
 
 // This Widget is the main application widget.
 class MyApp extends StatelessWidget {
@@ -59,23 +76,22 @@ class Home extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<Home> {
-  int _count = 0;
+  
+  List _indexPageList = [RouteChat(), RouteRadio()];
 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BoxAppBar(),
       drawer: _drawer(context),
-      body: Center(
-        child: Text('You have pressed the button $_count times.'),
-      ),
+      body: _indexPageList[Provider.of<DataInfo>(context).getIndexNow()],
       bottomNavigationBar: BoxBottomNavigationBar(),
 
 
       floatingActionButton: FloatingActionButton(
         onPressed: () => setState(() {
-          _count++;
+          // _indexPage = 1;
         }),
-        tooltip: 'Increment Counter',
+        tooltip: 'Fucking this!',
         child: Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
